@@ -30,13 +30,15 @@ public class PlayerMovement : MonoBehaviour
 
 
     [Header("Slope Check Variables")]
+    [SerializeField] private float maxSlopeAngle;
     [SerializeField] private float slopeCheckDistance;
     private Vector2 colliderSize;
     private Vector2 slopeNormalPerp;
     private float slopeDownAngle;
     private float slopeDownAngleOld;
-    private bool isOnSlope;
     private float slopeSideAngle;
+    private bool isOnSlope;
+    private bool canWalkOnSlope;
 
 
     [Header("Ground Check")]
@@ -89,8 +91,6 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && canJump)
         {
-
-
             canJump = false;
             isJumping = true;
             jumpTime = jumpStartTime;
@@ -198,18 +198,29 @@ public class PlayerMovement : MonoBehaviour
 
         if (slopeHitFront)
         {
-            isOnSlope = true;
-            //slopeSideAngle = Vector2.Angle(slopeHitFront.normal, Vector2.up);
+/*            float slopeFAngle = Vector2.Angle(slopeHitFront.normal, Vector2.up);
+            if (slopeFAngle <= 90f)
+            {*/
+                isOnSlope = true;
+                slopeSideAngle = Vector2.Angle(slopeHitFront.normal, Vector2.up);
+
+            //}
+
         }
 
         else if (slopeHitBack)
         {
-            isOnSlope = true;
-            // slopeSideAngle = Vector2.Angle(slopeHitBack.normal, Vector2.up);
+/*            float slopeBackAngle = Vector2.Angle(slopeHitBack.normal, Vector2.up);
+            if (slopeBackAngle <= 90f)
+            {*/
+                isOnSlope = true;
+                slopeSideAngle = Vector2.Angle(slopeHitBack.normal, Vector2.up);
+            //}
+
         }
         else
         {
-            //slopeSideAngle = 0.0f;
+            slopeSideAngle = 0.0f;
             isOnSlope = false;
         }
     }
@@ -234,7 +245,16 @@ public class PlayerMovement : MonoBehaviour
             Debug.DrawRay(hit.point, hit.normal, Color.green);
         }
 
-        if (isOnSlope && directionX == 0.0f)
+        if (slopeDownAngle > maxSlopeAngle || slopeSideAngle > maxSlopeAngle )
+        {
+            canWalkOnSlope = false;
+        }
+        else
+        {
+            canWalkOnSlope = true;
+        }
+        
+        if (isOnSlope && directionX == 0.0f && canWalkOnSlope)
         {
             rb.sharedMaterial = fullFriction;
         }
@@ -250,7 +270,7 @@ public class PlayerMovement : MonoBehaviour
 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
 
-        if (isGrounded && !isJumping)
+        if (isGrounded && !isJumping && slopeDownAngle <= maxSlopeAngle)
         {
             canJump = true;
         }
@@ -262,10 +282,10 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isGrounded && !isOnSlope && !isJumping)
         {
-            newVelocity.Set(moveSpeed * directionX, 0.0f);
+            newVelocity.Set(moveSpeed * directionX, rb.velocity.y);
             rb.velocity = newVelocity;
         }
-        else if (isGrounded && isOnSlope && !isJumping)
+        else if (isGrounded && isOnSlope && !isJumping && canWalkOnSlope)
         {
             newVelocity.Set(moveSpeed * slopeNormalPerp.x * -directionX, moveSpeed * slopeNormalPerp.y * -directionX);
             rb.velocity = newVelocity;
