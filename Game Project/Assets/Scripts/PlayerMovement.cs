@@ -64,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isJumping;
 
-    private enum MovementState { idle, running, falling, jumping };
+    private enum MovementState { idle, running, falling, jumping, jumpingAction};
 
 
     // Start is called before the first frame update
@@ -172,6 +172,10 @@ public class PlayerMovement : MonoBehaviour
         {
             state = MovementState.jumping;
         }
+        /*        if (rb.velocity.y > 0.2f && !isOnSlope && isJumping)
+                {
+                    state = MovementState.jumpingAction;
+                }*/
 
         else if (rb.velocity.y < -1.5f && !isOnSlope)
         {
