@@ -21,3 +21,9 @@ __Goal:__ Create a game inspired/similar to Metroid : Zero Mission.
 * Added enemies and basic shooting/enemy and enemy death logic and the animations that go along with them.
 
 ![shooting_and_enemy](https://github.com/jkohh12/Unity-Solo-Game-Project/assets/136869443/6bfe9485-9c9c-49cb-9b05-270d0fc1e40b)
+
+__Things that need to fixed/added__
+* need to remove impactEffect object that is instantiated when a bullet impacts anything (could cause lag later on in development)
+* player damage logic
+* enemy movement/logic
+* parallax bg
