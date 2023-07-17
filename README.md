@@ -8,4 +8,4 @@ __Goal:__ Create a game inspired/similar to Metroid:Zero Mission.
 
 ## Week 1
 
-Spent most of the week refreshing myself on Unity and implementing basic movement
+* I spent most of the week refreshing myself on Unity and implementing basic movement
