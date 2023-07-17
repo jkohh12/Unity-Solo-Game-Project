@@ -8,9 +8,10 @@ __Goal:__ Create a game inspired/similar to Metroid : Zero Mission.
 
 ## Week 1
 
-* Created a really simple map, inspired by the first map of __Metroid:Zero Mission__
+* Created a really simple map, inspired by the first map of __Metroid:Zero Mission__.
 
 ![InitialMap](https://github.com/jkohh12/Unity-Solo-Game-Project/assets/136869443/1063a57b-e7f9-4504-8c20-b3e48bf515d8)
 
-* Implemented Basic Movement for the character
-* 
+* Implemented Basic Movement for the character along with the animations that go along with it.
+
+![movement](https://github.com/jkohh12/Unity-Solo-Game-Project/assets/136869443/7e4d66dd-39f0-4019-994b-df434a91919a)
