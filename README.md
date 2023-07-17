@@ -4,7 +4,7 @@ __Goal:__ Create a game inspired/similar to Metroid : Zero Mission.
 ## Assets being used
 [__Warped Caves__](https://assetstore.unity.com/packages/2d/characters/warped-caves-103250)
 
-![warpedcavesource](https://github.com/jkohh12/Unity-Solo-Game-Project/assets/136869443/156e88b2-782e-46e9-baf5-fe2d573092b7)
+![warpedcavesource]<img src ="https://github.com/jkohh12/Unity-Solo-Game-Project/assets/136869443/156e88b2-782e-46e9-baf5-fe2d573092b7" width="600" height="300">
 
 ## Week 1
 
@@ -18,4 +18,4 @@ __Goal:__ Create a game inspired/similar to Metroid : Zero Mission.
 
 * Added enemies and basic shooting/enemy and enemy death logic and the animations that go along with them.
 
-  ![shooting_and_enemy](https://github.com/jkohh12/Unity-Solo-Game-Project/assets/136869443/6bfe9485-9c9c-49cb-9b05-270d0fc1e40b)
+![shooting_and_enemy](https://github.com/jkohh12/Unity-Solo-Game-Project/assets/136869443/6bfe9485-9c9c-49cb-9b05-270d0fc1e40b)
