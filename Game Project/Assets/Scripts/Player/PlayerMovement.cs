@@ -12,6 +12,7 @@ public class PlayerMovement : MonoBehaviour
     private CapsuleCollider2D coll;
     private SpriteRenderer sprite;
 
+    private bool isFacingRight = true;
 
     float directionX;
 
@@ -155,12 +156,23 @@ public class PlayerMovement : MonoBehaviour
 
         if (directionX > 0f)
         {
-            sprite.flipX = false;
+            
+            if(!isFacingRight)
+            {
+                Flip();
+                isFacingRight = true;
+            }
             state = MovementState.running;
         }
         else if (directionX < 0f)
         {
-            sprite.flipX = true;
+      
+            if (isFacingRight)
+            {
+                isFacingRight = false;
+                Flip();
+            }
+   
             state = MovementState.running;
         }
         else
@@ -172,10 +184,6 @@ public class PlayerMovement : MonoBehaviour
         {
             state = MovementState.jumping;
         }
-        /*        if (rb.velocity.y > 0.2f && !isOnSlope && isJumping)
-                {
-                    state = MovementState.jumpingAction;
-                }*/
 
         else if (rb.velocity.y < -1.5f && !isOnSlope)
         {
@@ -185,6 +193,16 @@ public class PlayerMovement : MonoBehaviour
         animator.SetInteger("state", (int)state);
     }
 
+    private void Flip()
+    {
+        
+        if(!isFacingRight)
+        {
+            transform.Rotate(0f, 180f, 0f);
+ 
+            
+        }
+    }
     private void SlopeCheck()
     {
         //determine position at bottom of capsule collider
