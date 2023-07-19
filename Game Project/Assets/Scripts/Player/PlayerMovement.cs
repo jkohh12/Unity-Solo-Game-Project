@@ -14,9 +14,12 @@ public class PlayerMovement : MonoBehaviour
 
     private bool isFacingRight = true;
 
-    float directionX;
+    public float directionX;
 
     private Vector2 newVelocity;
+
+
+
 
     [SerializeField] private LayerMask jumpableGround;
 
@@ -50,7 +53,7 @@ public class PlayerMovement : MonoBehaviour
 
     [Header("Jump Syatem")]
     bool canJump;
-    bool isGrounded;
+    public bool isGrounded;
     [SerializeField] private float jumpForce;
     [SerializeField] private float jumpStartTime;
     [SerializeField] private float fallStartTime;
@@ -92,6 +95,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetButtonDown("Jump") && canJump)
         {
+     
             canJump = false;
             isJumping = true;
             jumpTime = jumpStartTime;
@@ -153,6 +157,7 @@ public class PlayerMovement : MonoBehaviour
     {
 
         MovementState state;
+        animator.SetBool("InterruptAnimation", false);
 
         if (directionX > 0f)
         {
@@ -161,8 +166,10 @@ public class PlayerMovement : MonoBehaviour
             {
                 Flip();
                 isFacingRight = true;
+                animator.SetBool("InterruptAnimation", true);
             }
             state = MovementState.running;
+   
         }
         else if (directionX < 0f)
         {
@@ -171,25 +178,32 @@ public class PlayerMovement : MonoBehaviour
             {
                 isFacingRight = false;
                 Flip();
+                animator.SetBool("InterruptAnimation", true);
             }
    
             state = MovementState.running;
+      
+           
         }
         else
         {
             state = MovementState.idle;
+            animator.SetBool("InterruptAnimation", true);
+     
         }
 
         if (rb.velocity.y > 0.1f && !isOnSlope)
         {
             state = MovementState.jumping;
+            animator.SetBool("InterruptAnimation", true);
         }
 
         else if (rb.velocity.y < -1.5f && !isOnSlope)
         {
             state = MovementState.falling;
+            animator.SetBool("InterruptAnimation", true);
         }
-
+   
         animator.SetInteger("state", (int)state);
     }
 
