@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float speed = 25f;
     [SerializeField] private Rigidbody2D rb;
 
-    
+
     [SerializeField] private GameObject impactEffect;
     private GameObject createImpactEffect;
     // Start is called before the first frame update

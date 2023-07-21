@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
 
     [SerializeField] GameObject deathEffect;
 
+    [SerializeField] PlayerHealth playerHealth;
     public void TakeDamage (int damage)
     {
         health -= damage;
@@ -24,15 +25,11 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Player")
         {
-            var healthComponent = collision.GetComponent<PlayerHealth>();
-            if(healthComponent != null)
-            {
-                healthComponent.PlayerTakeDamage(20);
-            }
+            playerHealth.PlayerTakeDamage(20);
         }
     }
 }
