@@ -24,4 +24,15 @@ public class Enemy : MonoBehaviour
         Destroy(gameObject);
     }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.gameObject.tag == "Player")
+        {
+            var healthComponent = collision.GetComponent<PlayerHealth>();
+            if(healthComponent != null)
+            {
+                healthComponent.PlayerTakeDamage(20);
+            }
+        }
+    }
 }

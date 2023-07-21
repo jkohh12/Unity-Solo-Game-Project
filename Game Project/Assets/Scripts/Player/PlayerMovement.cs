@@ -60,7 +60,7 @@ public class PlayerMovement : MonoBehaviour
     private float jumpTime;
     private float fallTime;
     private float jumpCounter;
-    [SerializeField] private float jumpMulitplier;
+    [SerializeField] private float jumpMultiplier;
     [SerializeField] private float fallMultiplier;
 
 
@@ -104,16 +104,16 @@ public class PlayerMovement : MonoBehaviour
         }
 
         //block of code for "mario" jump
-        if (Input.GetButton("Jump") && isJumping == true) //check for holding space key
+        if (Input.GetButton("Jump") && isJumping == true && !isOnSlope && !isGrounded) //check for holding space key
         {
             jumpCounter += Time.deltaTime;
             float t = jumpCounter / jumpTime;
-            float currentJumpM = jumpMulitplier;
+            float currentJumpM = jumpMultiplier;
             if (jumpTime > 0)
             {
                 if (t < 0.5f) //if half the jump time is up, the character moves upward slower.
                 {
-                    currentJumpM = jumpMulitplier * (1 - t);
+                    currentJumpM = jumpMultiplier * (1 - t);
                 }
                 //rb.velocity = new Vector2(rb.velocity.x, jumpMulitplier);
                 rb.velocity += vecGravity * currentJumpM * Time.deltaTime;
