@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8477861551607847060}
   - component: {fileID: 8477861551607847067}
   - component: {fileID: 4928646011944626081}
-  - component: {fileID: 2216652040467583947}
   - component: {fileID: 2499107583476089088}
   - component: {fileID: -772086410652521137}
   m_Layer: 0
@@ -109,22 +108,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!58 &2216652040467583947
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8477861551607847066}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.1875
 --- !u!70 &2499107583476089088
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -156,4 +139,5 @@ MonoBehaviour:
   damage: 40
   speed: 20
   rb: {fileID: 4928646011944626081}
+  playerMovementRef: {fileID: 0}
   impactEffect: {fileID: 3620014444082161834, guid: db0a02ff41c39264cba944f2725cb5ad, type: 3}

@@ -5,15 +5,20 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     [SerializeField] private int damage = 40;
-    [SerializeField] private float speed = 20f;
+    [SerializeField] private float speed = 15f;
     [SerializeField] private Rigidbody2D rb;
 
+    
     [SerializeField] private GameObject impactEffect;
     private GameObject createImpactEffect;
     // Start is called before the first frame update
     void Start()
-    {
+    {   
+
+      
+
         rb.velocity = transform.right * speed;
+
     }
 
     private void OnTriggerEnter2D (Collider2D hitInfo)

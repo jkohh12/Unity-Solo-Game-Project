@@ -395,25 +395,25 @@ AnimatorController:
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: runshoot
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: jumpshoot
     m_Type: 9
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   - m_Name: InterruptAnimation
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
     m_DefaultBool: 0
-    m_Controller: {fileID: 0}
+    m_Controller: {fileID: 9100000}
   m_AnimatorLayers:
   - serializedVersion: 5
     m_Name: Base Layer
@@ -776,16 +776,16 @@ AnimatorStateMachine:
     m_Position: {x: 550, y: -10, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5697358076548175322}
-    m_Position: {x: 500, y: 260, z: 0}
+    m_Position: {x: 490, y: 250, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5872383095934743415}
     m_Position: {x: 620, y: 110, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 592413844336740494}
-    m_Position: {x: 730, y: 310, z: 0}
+    m_Position: {x: 50, y: 220, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 2738856218975326119}
-    m_Position: {x: 200, y: -180, z: 0}
+    m_Position: {x: 40, y: -80, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions:
   - {fileID: 6009622146082243549}

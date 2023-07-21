@@ -12,7 +12,7 @@ public class Weapon : MonoBehaviour
 
     private Rigidbody2D rb;
 
-
+    private float shootTime = 0.1f; //limit the amount the player can shoot by time
 
     // Update is called once per frame
     private void Start()
@@ -23,8 +23,15 @@ public class Weapon : MonoBehaviour
     {
         if(Input.GetButtonDown("Fire1"))
         {
-
-            Shoot();
+/*            shootTime -= Time.deltaTime;
+            if (shootTime > 0)*/
+           // {
+                Shoot();
+           // }
+  /*          if(shootTime < 0)
+            {
+                shootTime = 0.1f;
+            }*/
         }
     }
 
