@@ -17,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     public float directionX;
 
     private Vector2 newVelocity;
+    private Vector2 newForce;
 
 
 
@@ -86,25 +87,33 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        directionX = Input.GetAxisRaw("Horizontal");
 
+        directionX = Input.GetAxisRaw("Horizontal");
 
         //   rb.velocity = new Vector2(directionX * moveSpeed, rb.velocity.y);
 
 
 
-        if (Input.GetButtonDown("Jump") && canJump)
+        if (Input.GetButtonDown("Jump") && canJump && isGrounded)
         {
-     
+
             canJump = false;
             isJumping = true;
             jumpTime = jumpStartTime;
             fallTime = fallStartTime;
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            //need to rework jumping somehow (collding with walls causes character jump super high)
+            /*            canJump = false;
+                        isJumping = true;
+                        newVelocity.Set(0.0f, 0.0f);
+                        rb.velocity = newVelocity;
+                        newForce.Set(0.0f, jumpForce);
+                        rb.AddForce(newForce, ForceMode2D.Impulse);*/
+
         }
 
         //block of code for "mario" jump
-        if (Input.GetButton("Jump") && isJumping == true && !isOnSlope && !isGrounded) //check for holding space key
+        if (Input.GetButton("Jump") && isJumping && !isOnSlope && !isGrounded)//check for holding space key
         {
             jumpCounter += Time.deltaTime;
             float t = jumpCounter / jumpTime;
@@ -130,6 +139,12 @@ public class PlayerMovement : MonoBehaviour
         {
 
             isJumping = false;
+            jumpCounter = 0;
+
+            if (rb.velocity.y > 0)
+            {
+                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.6f);
+            }
         }
 
 
@@ -220,7 +235,7 @@ public class PlayerMovement : MonoBehaviour
     private void SlopeCheck()
     {
         //determine position at bottom of capsule collider
-        Vector2 checkPos = coll.bounds.center - new Vector3(0.0f, colliderSize.y / 2);
+        Vector2 checkPos = coll.bounds.center - (Vector3)(new Vector2(0.0f, colliderSize.y / 2));
 
         SlopeCheckHorizontal(checkPos);
         SlopeCheckVertical(checkPos);
@@ -232,11 +247,12 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit2D slopeHitFront = Physics2D.Raycast(checkPos, transform.right, slopeCheckDistance, whatIsGround);
         RaycastHit2D slopeHitBack = Physics2D.Raycast(checkPos, -transform.right, slopeCheckDistance, whatIsGround);
 
-        if (slopeHitFront)
+        if (slopeHitFront /*if the raycast is colliding with terrain tag? */)
         {
-/*            float slopeFAngle = Vector2.Angle(slopeHitFront.normal, Vector2.up);
-            if (slopeFAngle <= 90f)
-            {*/
+            /*            float slopeFAngle = Vector2.Angle(slopeHitFront.normal, Vector2.up);
+                        if (slopeFAngle <= 90f)
+                        {*/
+           // Debug.Log(slopeSideAngle);
                 isOnSlope = true;
                 slopeSideAngle = Vector2.Angle(slopeHitFront.normal, Vector2.up);
 
@@ -306,6 +322,11 @@ public class PlayerMovement : MonoBehaviour
 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
 
+        if (rb.velocity.y <= 0.0f)
+        {
+            isJumping = false;
+        }
+
         if (isGrounded && !isJumping && slopeDownAngle <= maxSlopeAngle)
         {
             canJump = true;
@@ -318,7 +339,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (isGrounded && !isOnSlope && !isJumping)
         {
-            newVelocity.Set(moveSpeed * directionX, rb.velocity.y);
+            newVelocity.Set(moveSpeed * directionX, 0.0f);
             rb.velocity = newVelocity;
         }
         else if (isGrounded && isOnSlope && !isJumping && canWalkOnSlope)

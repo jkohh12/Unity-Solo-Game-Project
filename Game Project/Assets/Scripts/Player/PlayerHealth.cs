@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
-    [SerializeField] private int maxHealth = 200;
+    [SerializeField] private int maxHealth;
     [SerializeField] private int currentHealth;
 
     [SerializeField] private Animator anim;
@@ -23,7 +23,12 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth <= 0)
         {
             anim.SetTrigger("isDead");
-            Destroy(gameObject);
+           //Destroy(gameObject);
         }
+    }
+
+    private void DestroyObject()
+    {
+        Destroy(gameObject);
     }
 }
