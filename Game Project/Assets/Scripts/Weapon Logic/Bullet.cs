@@ -8,7 +8,7 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float speed = 25f;
     [SerializeField] private Rigidbody2D rb;
 
-
+    private float impactEffectTimer = 20f;
     [SerializeField] private GameObject impactEffect;
     private GameObject createImpactEffect;
     // Start is called before the first frame update
@@ -32,7 +32,11 @@ public class Bullet : MonoBehaviour
         //how to delete impactEffect?
         Debug.Log(hitInfo.name);
         Destroy(gameObject);
-  
+
+
+
+
+   
 
     }
 
@@ -41,6 +45,7 @@ public class Bullet : MonoBehaviour
         enabled = false;
         Destroy(gameObject);
     }
+
 
 
 }
