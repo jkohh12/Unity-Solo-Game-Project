@@ -9,6 +9,7 @@ __Goal:__ Create a game inspired/similar to Metroid : Zero Mission.
 <img src ="https://github.com/jkohh12/Unity-Solo-Game-Project/assets/136869443/fda702e6-cca9-4c07-8030-35f79fe19f04" width="600" height="300">
 
 <details>
+## Week 1
 <summary>## Week 1</summary>
 
 
