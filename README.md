@@ -42,10 +42,12 @@ __Things that need to fixed/added__
 ![FirstMap(Complete)](https://github.com/jkohh12/Unity-Solo-Game-Project/assets/136869443/9c6d344a-3fda-4125-87c0-326ea86bf8dc)
 
 * Added animation for running and shooting, as well as interruptions to that animation to make movement smoother
-daa
+
+https://github.com/jkohh12/Unity-Solo-Game-Project/assets/136869443/5adc960c-0240-4a04-8bad-df1035ce176b
+
+![animator view](https://github.com/jkohh12/Unity-Solo-Game-Project/assets/136869443/59b64600-f9a1-4cb3-bf55-b7629e2cf297)
 
 
-https://github.com/jkohh12/Unity-Solo-Game-Project/assets/136869443/135ca222-a2a2-446a-aac7-9daa5ddbae1c
 
 
 </details>
