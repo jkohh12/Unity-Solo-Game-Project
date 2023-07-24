@@ -65,6 +65,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float fallMultiplier;
 
 
+    [Header("Knockback System")]
+    [SerializeField] private float KBForce; //how powerful the knockback is
+    [SerializeField] private float KBCounter; //counts down how much time left on effect
+    [SerializeField] private float KBTotalTime; //how long knock back effect will last alltogether
+    private bool KnockFromRight;
+
+
+
     //can implement max slope angle later if needed
 
     private bool isJumping;
@@ -337,6 +345,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void ApplyMovement()
     {
+        if(KBCounter <= 0)
+        {
+
+        }
         if (isGrounded && !isOnSlope && !isJumping)
         {
             newVelocity.Set(moveSpeed * directionX, 0.0f);

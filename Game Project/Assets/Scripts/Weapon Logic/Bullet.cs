@@ -32,12 +32,7 @@ public class Bullet : MonoBehaviour
         //how to delete impactEffect?
         Debug.Log(hitInfo.name);
         Destroy(gameObject);
-
-
-
-
-   
-
+        Destroy(createImpactEffect, 1);
     }
 
     private void OnBecameInvisible()
