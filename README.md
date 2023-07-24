@@ -32,3 +32,20 @@ __Things that need to fixed/added__
 * parallax bg
 
 </details>
+
+## Week 2
+<details>
+<summary>v0.0.2-alpha</summary>
+
+* Finished up the first map of the game, copied first map of Metroid/Metroid: Zero Mission
+
+![FirstMap(Complete)](https://github.com/jkohh12/Unity-Solo-Game-Project/assets/136869443/9c6d344a-3fda-4125-87c0-326ea86bf8dc)
+
+* Added animation for running and shooting, as well as interruptions to that animation to make movement smoother
+daa
+
+
+https://github.com/jkohh12/Unity-Solo-Game-Project/assets/136869443/135ca222-a2a2-446a-aac7-9daa5ddbae1c
+
+
+</details>
