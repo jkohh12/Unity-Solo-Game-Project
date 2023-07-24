@@ -12334,11 +12334,14 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   isGrounded: 0
-  jumpForce: 17
+  jumpForce: 15
   jumpStartTime: 0.25
   fallStartTime: 0.5
   jumpMultiplier: 5
   fallMultiplier: 5
+  KBForce: 0
+  KBCounter: 0
+  KBTotalTime: 0
 --- !u!95 &2096852269
 Animator:
   serializedVersion: 5
@@ -12405,7 +12408,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d7a8f63a198001741a372fcabb6fe0e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 20
+  maxHealth: 80
   currentHealth: 0
   anim: {fileID: 2096852269}
 --- !u!1 &2119833035
