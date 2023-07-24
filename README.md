@@ -55,6 +55,7 @@ https://github.com/jkohh12/Unity-Solo-Game-Project/assets/136869443/f860429b-4ae
 __Smaller things added/fixed__
 * deletion of all instantiated objects, causes less lag/less resources (impactEffect, deathEffect)
 * made jumping system slightly smoother
+* player shooting rate
 
 __Things that need to fixed/added__
 * player knockback
