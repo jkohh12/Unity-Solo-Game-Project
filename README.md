@@ -10,7 +10,7 @@ __Goal:__ Create a game inspired/similar to Metroid : Zero Mission.
 
 ## Week 1
 <details>
-<summary>clicl</summary>
+<summary>click!</summary>
 
 
 * Created a really simple map, inspired by the first map of __Metroid:Zero Mission__.
