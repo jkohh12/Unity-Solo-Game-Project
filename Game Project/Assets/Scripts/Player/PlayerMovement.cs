@@ -66,10 +66,10 @@ public class PlayerMovement : MonoBehaviour
 
 
     [Header("Knockback System")]
-    [SerializeField] private float KBForce; //how powerful the knockback is
-    [SerializeField] private float KBCounter; //counts down how much time left on effect
-    [SerializeField] private float KBTotalTime; //how long knock back effect will last alltogether
-    private bool KnockFromRight;
+    public float KBForce; //how powerful the knockback is
+    public float KBCounter; //counts down how much time left on effect
+    public float KBTotalTime; //how long knock back effect will last alltogether
+    public bool KnockFromRight;
 
 
 
@@ -346,23 +346,37 @@ public class PlayerMovement : MonoBehaviour
     private void ApplyMovement()
     {
         if(KBCounter <= 0)
+        { 
+            if (isGrounded && !isOnSlope && !isJumping)
+            {
+                newVelocity.Set(moveSpeed * directionX, 0.0f);
+                rb.velocity = newVelocity;
+            }
+            else if (isGrounded && isOnSlope && !isJumping && canWalkOnSlope)
+            {
+                newVelocity.Set(moveSpeed * slopeNormalPerp.x * -directionX, moveSpeed * slopeNormalPerp.y * -directionX);
+                rb.velocity = newVelocity;
+            }
+            else if (!isGrounded)
+            {
+                newVelocity.Set(moveSpeed * directionX, rb.velocity.y);
+                rb.velocity = newVelocity;
+            }
+        }
+        else
         {
+            if (KnockFromRight)
+            {
+                rb.velocity = new Vector2(-KBForce, KBForce);
 
-        }
-        if (isGrounded && !isOnSlope && !isJumping)
-        {
-            newVelocity.Set(moveSpeed * directionX, 0.0f);
-            rb.velocity = newVelocity;
-        }
-        else if (isGrounded && isOnSlope && !isJumping && canWalkOnSlope)
-        {
-            newVelocity.Set(moveSpeed * slopeNormalPerp.x * -directionX, moveSpeed * slopeNormalPerp.y * -directionX);
-            rb.velocity = newVelocity;
-        }
-        else if (!isGrounded)
-        {
-            newVelocity.Set(moveSpeed * directionX, rb.velocity.y);
-            rb.velocity = newVelocity;
+            }
+            if(!KnockFromRight)
+            {
+                rb.velocity = new Vector2(KBForce, KBForce);
+            }
+            KBCounter -= Time.deltaTime;
+  
+
         }
     }
 
