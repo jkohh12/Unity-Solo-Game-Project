@@ -65,11 +65,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float fallMultiplier;
 
 
-    [Header("Knockback System")]
-    public float KBForce; //how powerful the knockback is
-    public float KBCounter; //counts down how much time left on effect
-    public float KBTotalTime; //how long knock back effect will last alltogether
-    public bool KnockFromRight;
+    private KnockBack knockback;
 
 
 
@@ -88,7 +84,7 @@ public class PlayerMovement : MonoBehaviour
         animator = GetComponent<Animator>();
         sprite = GetComponent<SpriteRenderer>();
         coll = GetComponent<CapsuleCollider2D>();
-
+        knockback = GetComponent<KnockBack>();
         colliderSize = coll.size;
     }
 
@@ -100,70 +96,71 @@ public class PlayerMovement : MonoBehaviour
 
         //   rb.velocity = new Vector2(directionX * moveSpeed, rb.velocity.y);
 
+        if(!knockback.isBeingKnockedBack) {
 
-
-        if (Input.GetButtonDown("Jump") && canJump && isGrounded)
-        {
-
-            canJump = false;
-            isJumping = true;
-            jumpTime = jumpStartTime;
-            fallTime = fallStartTime;
-            rb.velocity = new Vector2(rb.velocity.x, jumpForce);
-            //need to rework jumping somehow (collding with walls causes character jump super high)
-            /*            canJump = false;
-                        isJumping = true;
-                        newVelocity.Set(0.0f, 0.0f);
-                        rb.velocity = newVelocity;
-                        newForce.Set(0.0f, jumpForce);
-                        rb.AddForce(newForce, ForceMode2D.Impulse);*/
-
-        }
-
-        //block of code for "mario" jump
-        if (Input.GetButton("Jump") && isJumping && !isOnSlope && !isGrounded)//check for holding space key
-        {
-            jumpCounter += Time.deltaTime;
-            float t = jumpCounter / jumpTime;
-            float currentJumpM = jumpMultiplier;
-            if (jumpTime > 0)
+            if (Input.GetButtonDown("Jump") && canJump && isGrounded)
             {
-                if (t < 0.5f) //if half the jump time is up, the character moves upward slower.
-                {
-                    currentJumpM = jumpMultiplier * (1 - t);
-                }
-                //rb.velocity = new Vector2(rb.velocity.x, jumpMulitplier);
-                rb.velocity += vecGravity * currentJumpM * Time.deltaTime;
-                jumpTime -= Time.deltaTime;
+
+                canJump = false;
+                isJumping = true;
+                jumpTime = jumpStartTime;
+                fallTime = fallStartTime;
+                rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+                //need to rework jumping somehow (collding with walls causes character jump super high)
+                /*            canJump = false;
+                            isJumping = true;
+                            newVelocity.Set(0.0f, 0.0f);
+                            rb.velocity = newVelocity;
+                            newForce.Set(0.0f, jumpForce);
+                            rb.AddForce(newForce, ForceMode2D.Impulse);*/
+
             }
-            else
+
+            //block of code for "mario" jump
+            if (Input.GetButton("Jump") && isJumping && !isOnSlope && !isGrounded)//check for holding space key
+            {
+                jumpCounter += Time.deltaTime;
+                float t = jumpCounter / jumpTime;
+                float currentJumpM = jumpMultiplier;
+                if (jumpTime > 0)
+                {
+                    if (t < 0.5f) //if half the jump time is up, the character moves upward slower.
+                    {
+                        currentJumpM = jumpMultiplier * (1 - t);
+                    }
+                    //rb.velocity = new Vector2(rb.velocity.x, jumpMulitplier);
+                    rb.velocity += vecGravity * currentJumpM * Time.deltaTime;
+                    jumpTime -= Time.deltaTime;
+                }
+                else
+                {
+
+                    isJumping = false;
+                }
+            }
+
+            if (Input.GetButtonUp("Jump")) //if the user isn't holding space, then isJumping is false, no more increase in jumpforce
             {
 
                 isJumping = false;
+                jumpCounter = 0;
+
+                if (rb.velocity.y > 0)
+                {
+                    rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.6f);
+                }
             }
-        }
 
-        if (Input.GetButtonUp("Jump")) //if the user isn't holding space, then isJumping is false, no more increase in jumpforce
-        {
 
-            isJumping = false;
-            jumpCounter = 0;
-
-            if (rb.velocity.y > 0)
+            if (rb.velocity.y < 0) // faster falling
             {
-                rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.6f);
-            }
-        }
 
-
-        if (rb.velocity.y < 0) // faster falling
-        {
-
-            //isFalling = true;
-            if (fallTime > 0)
-            {
-                rb.velocity -= vecGravity * fallMultiplier * Time.deltaTime;
-                fallTime -= Time.deltaTime;
+                //isFalling = true;
+                if (fallTime > 0)
+                {
+                    rb.velocity -= vecGravity * fallMultiplier * Time.deltaTime;
+                    fallTime -= Time.deltaTime;
+                }
             }
         }
     }
@@ -345,8 +342,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void ApplyMovement()
     {
-        if(KBCounter <= 0)
-        { 
+
+        if (!knockback.isBeingKnockedBack)
+        {
             if (isGrounded && !isOnSlope && !isJumping)
             {
                 newVelocity.Set(moveSpeed * directionX, 0.0f);
@@ -363,21 +361,7 @@ public class PlayerMovement : MonoBehaviour
                 rb.velocity = newVelocity;
             }
         }
-        else
-        {
-            if (KnockFromRight)
-            {
-                rb.velocity = new Vector2(-KBForce, KBForce);
 
-            }
-            if(!KnockFromRight)
-            {
-                rb.velocity = new Vector2(KBForce, KBForce);
-            }
-            KBCounter -= Time.deltaTime;
-  
-
-        }
     }
 
     private void OnDrawGizmos()

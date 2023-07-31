@@ -8,16 +8,19 @@ public class Bullet : MonoBehaviour
     [SerializeField] private float speed = 25f;
     [SerializeField] private Rigidbody2D rb;
 
-    private float impactEffectTimer = 20f;
+  
     [SerializeField] private GameObject impactEffect;
     private GameObject createImpactEffect;
     // Start is called before the first frame update
     void Start()
-    {   
+    {
 
         rb.velocity = transform.right * (speed);
 
     }
+
+
+
 
     private void OnTriggerEnter2D (Collider2D hitInfo)
     {

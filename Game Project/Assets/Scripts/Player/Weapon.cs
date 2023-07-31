@@ -25,7 +25,7 @@ public class Weapon : MonoBehaviour
     {
         if(Time.time >= shootTime)
         {
-            if (Input.GetButtonDown("Fire1"))
+            if (Input.GetButtonDown("Fire1") /*&& playerMovementRef.KBCounter <= 0*/)
             {
                 Shoot();
                 shootTime = Time.time + 1f / shootRate;

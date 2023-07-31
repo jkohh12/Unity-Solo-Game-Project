@@ -12,6 +12,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] PlayerHealth playerHealth;
     [SerializeField] PlayerMovement playerMovement;
 
+    private int mushroomDamage = 10;
+
     public void TakeDamage (int damage)
     {
         health -= damage;
@@ -32,18 +34,18 @@ public class Enemy : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
-            playerMovement.KBCounter = playerMovement.KBTotalTime; // the amount of time the player will be knocked back
-            if(collision.transform.position.x <= transform.position.x) //if player is on the left, hit from right
+            //playerMovement.KBCounter = playerMovement.KBTotalTime; // the amount of time the player will be knocked back
+            if (collision.transform.position.x <= transform.position.x) //if player is on the left, hit from right
             {
-                playerMovement.KnockFromRight = true;
+                playerHealth.PlayerTakeDamage(mushroomDamage, -transform.right);
             }
-            if(collision.transform.position.x >= transform.position.x)
+            else if (collision.transform.position.x >= transform.position.x)
             {
-                playerMovement.KnockFromRight = false;
+                playerHealth.PlayerTakeDamage(mushroomDamage, transform.right);
             }
-            playerHealth.PlayerTakeDamage(20);
+            
         }
     }
 }
